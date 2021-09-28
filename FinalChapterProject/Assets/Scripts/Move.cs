@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class Move : MonoBehaviour
 {
+    public Work work;
+    public Restaurrant restaurrant;
+
     public Transform[] waypoins;
  
     public GameObject homePanel, investoryPanel, workplacePanel, hospitalPanel,
         shopPanel, bankPanel, restaurrantPanel;
 
     [SerializeField]
-    private float speed;
+    public float speed;
 
-    private bool moveToHome, moveToInvestory, moveToWorkPlace, moveToHospital,
+    public bool moveToHome, moveToInvestory, moveToWorkPlace, moveToHospital,
         moveToShop, moveToBank, moveToRestaurrant = false;
 
 
@@ -31,7 +34,7 @@ public class Move : MonoBehaviour
     }
 
     // Move
-    private void MoveTo()
+    public void MoveTo()
     {
         if (moveToHome == true)
         {
@@ -61,6 +64,8 @@ public class Move : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, waypoins[2].transform.position, speed * Time.deltaTime);
             if (transform.position == waypoins[2].transform.position)
             {
+                work.UnLockWork(); //CheckUnlockWork 2 and 3   (Foem Work scripts)
+
                 StartCoroutine(WaitWorkplacePanel());
                 moveToWorkPlace = false;
             }
@@ -107,6 +112,8 @@ public class Move : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, waypoins[6].transform.position, speed * Time.deltaTime);
             if (transform.position == waypoins[6].transform.position)
             {
+                restaurrant.UnBlockBuy();
+
                 StartCoroutine(WaitRestaurrantPanel());
                 moveToRestaurrant = false;
             }

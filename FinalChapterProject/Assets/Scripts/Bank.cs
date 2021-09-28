@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class Bank : MonoBehaviour
 {
+    public Status status;
+
     public Text bankDepositText;
     public Text checkMoney;
     public InputField amountMoneyText;
     public int amountMoney;
-    public int moneyTest; //Ex Money in status
+    //public int moneyTest; //Ex Money in status
 
-    private int bankdeposit;
+    public int bankdeposit;
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +35,16 @@ public class Bank : MonoBehaviour
             amountMoney = System.Convert.ToInt32(amountMoneyText.text);
             if (amountMoney != 0)
             {
-                if (amountMoney <= moneyTest)
+                if (amountMoney <= status.money)
                 {
-                    moneyTest = moneyTest - amountMoney;
+                    status.money = status.money - amountMoney;
                     bankdeposit = bankdeposit + amountMoney;
                     UpdateBankDepositText();
                     checkMoney.text = " Completed. ";
                     checkMoney.color = Color.green;
-                    amountMoneyText.text = "";  ///Note: add Energy
+                    amountMoneyText.text = "";  
+
+                    status.OneAction(); //Use Energy
                 }
                 else
                 {
@@ -63,13 +67,15 @@ public class Bank : MonoBehaviour
 
     public void AllDeposit()
     {
-        if(moneyTest != 0)
+        if(status.money != 0)
         {
-            bankdeposit = bankdeposit + moneyTest;
-            moneyTest = 0;
+            bankdeposit = bankdeposit + status.money;
+            status.money = 0;
             UpdateBankDepositText();
             checkMoney.text = " Completed. ";
-            checkMoney.color = Color.green;   ///Note: add Energy
+            checkMoney.color = Color.green;   
+
+            status.OneAction(); //Use Energy
         }
         else
         {
@@ -87,12 +93,14 @@ public class Bank : MonoBehaviour
             {
                 if (amountMoney <= bankdeposit)
                 {
-                    moneyTest = moneyTest + amountMoney;
+                    status.money = status.money + amountMoney;
                     bankdeposit = bankdeposit - amountMoney;
                     UpdateBankDepositText();
                     checkMoney.text = " Completed. ";
                     checkMoney.color = Color.green;
-                    amountMoneyText.text = "";   ///Note: add Energy
+                    amountMoneyText.text = "";
+
+                    status.OneAction(); //Use Energy
                 }
                 else
                 {
@@ -117,11 +125,13 @@ public class Bank : MonoBehaviour
     {
         if (bankdeposit != 0)
         {
-            moneyTest = moneyTest + bankdeposit;
+            status.money = status.money + bankdeposit;
             bankdeposit = 0;
             UpdateBankDepositText();
             checkMoney.text = " Completed. ";
-            checkMoney.color = Color.green;   ///Note: add Energy
+            checkMoney.color = Color.green;
+
+            status.OneAction(); //Use Energy
         }
         else
         {

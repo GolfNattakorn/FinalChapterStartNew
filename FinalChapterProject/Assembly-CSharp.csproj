@@ -60,6 +60,8 @@
     <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
+    <Compile Include="Assets\Scripts\Work.cs" />
+    <Compile Include="Assets\Scripts\Restaurrant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

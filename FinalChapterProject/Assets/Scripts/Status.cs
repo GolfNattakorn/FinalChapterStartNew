@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Status : MonoBehaviour
 {
     public Registration registration;
+    public Bank bank;
+    public Move move;
    
     public Text textYourname;
     public Image statusImage;
@@ -18,19 +20,37 @@ public class Status : MonoBehaviour
     public int knowledge;
     public int energy;
 
+    public Text moneyText;
+
     //Scrollbar
     public Scrollbar happyScrollbar;
     public Scrollbar healthScrollbar;
     public Scrollbar knowledgeScrollbar;
     public Scrollbar energyScrollbar;
+    public Text happyPointText;
+    public Text healthPointText;
+    public Text knowledgePointText;
+    public Text energyPointText;
 
     //GamePlay
     public Text roundGameText;
     public Text timeText;
 
-    private int roundgame = 0;
+    public GameObject player;
+    public GameObject[] allMapPanel;
+
+    public int roundgame;
     private float time;
     private int timer;
+
+    //FadeRound
+    public GameObject fadePanel;
+    public Image fadeImage;
+    public Text fadeRoundText;
+
+    //GameOver
+    public GameObject gameOverPanel;
+
 
 
     // Start is called before the first frame update
@@ -47,8 +67,9 @@ public class Status : MonoBehaviour
 
         StatusLimit();
         StatusScrollbar();
-        TimeofGame();
+        
         RoundOfGame();
+        UpdateMoney();
     }
 
     private void NameStatus()
@@ -120,8 +141,29 @@ public class Status : MonoBehaviour
         }
     }
 
+    
+
+    private void CheckHappy()
+    {
+        if (happy <= 0)
+        {
+            happy = 0;
+            health -= 10;
+        }
+    }
+
+    private void UpdateMoney()
+    {
+        moneyText.text = money + " B( " + bank.bankdeposit + " B) ";
+    }
+
     private void StatusScrollbar()
     {
+        happyPointText.text = happy + "/100";
+        healthPointText.text = health + "/100";
+        knowledgePointText.text = knowledge + "/50";
+        energyPointText.text = energy + "/100";
+
         happyScrollbar.size = (float)happy / 100;
         healthScrollbar.size = (float)health / 100;
         knowledgeScrollbar.size = (float)knowledge / 50;
@@ -135,39 +177,79 @@ public class Status : MonoBehaviour
 
     public void OneAction()
     {
-        energy = energy - 10;
+        if(energy != 0)
+        {
+            energy = energy - 10;
+        }
     }
 
     private void RoundOfGame()
     {
-        if(roundgame == 5)
+        if (health <= 0)
         {
+            gameOverPanel.SetActive(true);
+        }
+        else if (roundgame == 5)
+        {
+            TimeofGame();
+
             if (time == 0f || energy == 0)
             {
-                roundgame = roundgame + 1;
-                
-                time = 60f;
-                energy = 100;
+                ///On Result Playing Player
+
+                bank.BankInterest();
             }
         }
         else if(roundgame >=1 && roundgame <= 4)
         {
+            TimeofGame();
+
             if (time == 0f || energy == 0)
             {
                 roundgame = roundgame + 1;
-                
+                fadePanel.SetActive(true);
+                fadeRoundText.text = "รอบที่ " + roundgame;
+                FadeIn();
+
+                Debug.Log("Round " + roundgame);
+
                 time = 60f;
                 energy = 100;
+
+                
+                CheckHappy();
+                bank.BankInterest();
+
+                player.transform.position =  move.waypoins[0].transform.position;
+
+                for (int i = 0; i < allMapPanel.Length; i++) //Open StartPointPanel When Start Next Round 
+                {
+                    if(i == 0)
+                    {
+                        allMapPanel[0].SetActive(true);
+                    }
+                    else
+                    {
+                        allMapPanel[i].SetActive(false);
+                    }
+                }
             }
         }
         else
         {
             roundgame = roundgame + 1;
+            fadePanel.SetActive(true);
+            fadeRoundText.text = "รอบที่ " + roundgame;
+            FadeIn();
+
+            Debug.Log("Round " + roundgame);
             time = 60f;
             energy = 100;
+
+           
         }
         roundGameText.text = roundgame + "/5";
-        //// Round 1 must be set at the startButton of Rules
+        
 
     }
 
@@ -178,7 +260,7 @@ public class Status : MonoBehaviour
             time = time - 1*Time.deltaTime;
             timer = System.Convert.ToInt32(time);
             
-            Debug.Log(timer);
+            
             
         }
         else
@@ -186,8 +268,25 @@ public class Status : MonoBehaviour
             time = 0f;
             timer = System.Convert.ToInt32(time);
             
-            Debug.Log(timer);
+            
         }
         timeText.text = timer.ToString();
+    }
+
+    private void FadeIn()
+    {
+        
+        fadeImage.CrossFadeAlpha(1, 1.0f, false);
+        //StartCoroutine(CloseFadePanel());
+        StartCoroutine(FadeOut());
+
+    }
+
+    IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(1.0f);
+        fadeImage.CrossFadeAlpha(0, 1.0f, false);
+        yield return new WaitForSeconds(1.0f);
+        fadePanel.SetActive(false);
     }
 }
