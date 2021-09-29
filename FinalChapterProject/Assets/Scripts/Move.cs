@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
 {
     public Work work;
     public Restaurrant restaurrant;
+    public HomePro homepro;
 
     public Transform[] waypoins;
  
@@ -90,6 +91,8 @@ public class Move : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, waypoins[4].transform.position, speed * Time.deltaTime);
             if (transform.position == waypoins[4].transform.position)
             {
+                homepro.UnBlockBuy();
+
                 StartCoroutine(WaitShopPanel());
                 moveToShop = false;
             }

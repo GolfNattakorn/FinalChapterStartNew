@@ -56,12 +56,14 @@
     <Compile Include="Assets\Scripts\Investory.cs" />
     <Compile Include="Assets\Scripts\Rules.cs" />
     <Compile Include="Assets\Scripts\Status.cs" />
+    <Compile Include="Assets\Scripts\Work.cs" />
     <Compile Include="Assets\Scripts\DebtDetail.cs" />
+    <Compile Include="Assets\Scripts\Restaurrant.cs" />
     <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
-    <Compile Include="Assets\Scripts\Work.cs" />
-    <Compile Include="Assets\Scripts\Restaurrant.cs" />
+    <Compile Include="Assets\Scripts\HomePro.cs" />
+    <Compile Include="Assets\Scripts\Condo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

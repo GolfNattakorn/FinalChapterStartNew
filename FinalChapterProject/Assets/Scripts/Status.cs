@@ -8,6 +8,7 @@ public class Status : MonoBehaviour
     public Registration registration;
     public Bank bank;
     public Move move;
+    public HomePro homepro;
    
     public Text textYourname;
     public Image statusImage;
@@ -191,7 +192,7 @@ public class Status : MonoBehaviour
         }
         else if (roundgame == 5)
         {
-            TimeofGame();
+            
 
             if (time == 0f || energy == 0)
             {
@@ -202,7 +203,7 @@ public class Status : MonoBehaviour
         }
         else if(roundgame >=1 && roundgame <= 4)
         {
-            TimeofGame();
+            
 
             if (time == 0f || energy == 0)
             {
@@ -219,6 +220,7 @@ public class Status : MonoBehaviour
                 
                 CheckHappy();
                 bank.BankInterest();
+                homepro.CheckFurnitureSell();
 
                 player.transform.position =  move.waypoins[0].transform.position;
 
@@ -246,8 +248,11 @@ public class Status : MonoBehaviour
             time = 60f;
             energy = 100;
 
-           
+            //homepro.CheckFurnitureSell();
+
+
         }
+        TimeofGame();
         roundGameText.text = roundgame + "/5";
         
 

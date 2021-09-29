@@ -125,19 +125,19 @@ public class Restaurrant : MonoBehaviour
                 }
             }
         }
-        if (status.money <= 200)
+        if (status.money < 200)
         {
             blockBuy[4].SetActive(true);
-            if (status.money <= 100)
+            if (status.money < 100)
             {
                 blockBuy[3].SetActive(true);
-                if (status.money <= 50)
+                if (status.money < 50)
                 {
                     blockBuy[2].SetActive(true);
-                    if (status.money <= 20)
+                    if (status.money < 20)
                     {
                         blockBuy[1].SetActive(true);
-                        if (status.money <= 10)
+                        if (status.money < 10)
                         {
                             blockBuy[0].SetActive(true);
                         }
