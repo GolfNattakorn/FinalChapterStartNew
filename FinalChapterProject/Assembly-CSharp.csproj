@@ -53,6 +53,7 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\HomePro.cs" />
     <Compile Include="Assets\Scripts\Investory.cs" />
     <Compile Include="Assets\Scripts\Rules.cs" />
     <Compile Include="Assets\Scripts\Status.cs" />
@@ -62,8 +63,8 @@
     <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
-    <Compile Include="Assets\Scripts\HomePro.cs" />
     <Compile Include="Assets\Scripts\Condo.cs" />
+    <Compile Include="Assets\Scripts\Hospital.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

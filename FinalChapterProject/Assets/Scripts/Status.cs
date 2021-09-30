@@ -9,6 +9,7 @@ public class Status : MonoBehaviour
     public Bank bank;
     public Move move;
     public HomePro homepro;
+    public Hospital hospital;
    
     public Text textYourname;
     public Image statusImage;
@@ -83,7 +84,7 @@ public class Status : MonoBehaviour
     }
 
     
-    private void PlayerImage()
+    public void PlayerImage()
     {
         switch (registration.yourimage)
         {
@@ -221,6 +222,8 @@ public class Status : MonoBehaviour
                 CheckHappy();
                 bank.BankInterest();
                 homepro.CheckFurnitureSell();
+                hospital.RandomUnwell();
+                hospital.UnWell();
 
                 player.transform.position =  move.waypoins[0].transform.position;
 

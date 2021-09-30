@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     public Work work;
     public Restaurrant restaurrant;
     public HomePro homepro;
+    public Hospital hospital;
 
     public Transform[] waypoins;
  
@@ -78,6 +79,8 @@ public class Move : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, waypoins[3].transform.position, speed * Time.deltaTime);
             if (transform.position == waypoins[3].transform.position)
             {
+                hospital.UnBlockHeal();
+
                 StartCoroutine(WaithospitalPanel());
                 moveToHospital = false;
             }
