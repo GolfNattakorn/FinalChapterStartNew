@@ -9,6 +9,7 @@ public class Move : MonoBehaviour
     public Restaurrant restaurrant;
     public HomePro homepro;
     public Hospital hospital;
+    public Investory investory;
 
     public Transform[] waypoins;
  
@@ -55,6 +56,8 @@ public class Move : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, waypoins[1].transform.position, speed * Time.deltaTime);
             if (transform.position == waypoins[1].transform.position)
             {
+                investory.UnBlockCourse();
+
                 StartCoroutine(WaitInvestoryPanel());
                 moveToInvestory = false;
             }

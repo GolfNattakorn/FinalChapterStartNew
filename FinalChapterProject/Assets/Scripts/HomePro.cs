@@ -195,7 +195,7 @@ public class HomePro : MonoBehaviour
     {
         for(int i = 0; i < furnitureAmount.Length; i++)
         {
-            int random = Random.Range(0, 6);
+            int random = Random.Range(0, 7);
             switch (furnitureAmount[i])
             {
                 case "Sofa":
@@ -237,6 +237,12 @@ public class HomePro : MonoBehaviour
                                 sofaPriceText.text = " - " + sofaPrice;
                                 sellFurnitureImage[0].enabled = true;
                                 sellFurnitureImage[0].sprite = sellSprite[4];
+                                break;
+                            case 6:
+                                sofaPrice = sofapriceold - (sofapriceold * 60 / 100);
+                                sofaPriceText.text = " - " + sofaPrice;
+                                sellFurnitureImage[0].enabled = true;
+                                sellFurnitureImage[0].sprite = sellSprite[5];
                                 break;
                         }
                     }
@@ -288,6 +294,12 @@ public class HomePro : MonoBehaviour
                                 sellFurnitureImage[1].enabled = true;
                                 sellFurnitureImage[1].sprite = sellSprite[4];
                                 break;
+                            case 6:
+                                tablePrice = tablepriceold - (tablepriceold * 60 / 100);
+                                tablePriceText.text = " - " + tablePrice;
+                                sellFurnitureImage[1].enabled = true;
+                                sellFurnitureImage[1].sprite = sellSprite[5];
+                                break;
                         }
                     }
                     else
@@ -337,6 +349,12 @@ public class HomePro : MonoBehaviour
                                 houseplantPriceText.text = " - " + houseplantPrice;
                                 sellFurnitureImage[2].enabled = true;
                                 sellFurnitureImage[2].sprite = sellSprite[4];
+                                break;
+                            case 6:
+                                houseplantPrice = houseplantpriceold - (houseplantpriceold * 60 / 100);
+                                houseplantPriceText.text = " - " + houseplantPrice;
+                                sellFurnitureImage[2].enabled = true;
+                                sellFurnitureImage[2].sprite = sellSprite[5];
                                 break;
                         }
                     }
@@ -388,6 +406,12 @@ public class HomePro : MonoBehaviour
                                 sellFurnitureImage[3].enabled = true;
                                 sellFurnitureImage[3].sprite = sellSprite[4];
                                 break;
+                            case 6:
+                                fridgePrice = fridgepriceold - (fridgepriceold * 60 / 100);
+                                fridgePriceText.text = " - " + fridgePrice;
+                                sellFurnitureImage[3].enabled = true;
+                                sellFurnitureImage[3].sprite = sellSprite[5];
+                                break;
                         }
                     }
                     else
@@ -436,6 +460,12 @@ public class HomePro : MonoBehaviour
                                 sellFurnitureImage[4].enabled = true;
                                 sellFurnitureImage[4].sprite = sellSprite[4];
                                 break;
+                            case 6:
+                                televisionPrice = televisionpriceold - (televisionpriceold * 60 / 100);
+                                televisionPriceText.text = " - " + televisionPrice;
+                                sellFurnitureImage[4].enabled = true;
+                                sellFurnitureImage[4].sprite = sellSprite[5];
+                                break;
                         }
                     }
                     else
@@ -483,6 +513,12 @@ public class HomePro : MonoBehaviour
                                 videogamePriceText.text = " - " + videogamePrice;
                                 sellFurnitureImage[5].enabled = true;
                                 sellFurnitureImage[5].sprite = sellSprite[4];
+                                break;
+                            case 6:
+                                videogamePrice = videogamepriceold - (videogamepriceold * 60 / 100);
+                                videogamePriceText.text = " - " + videogamePrice;
+                                sellFurnitureImage[5].enabled = true;
+                                sellFurnitureImage[5].sprite = sellSprite[5];
                                 break;
                         }
                     }

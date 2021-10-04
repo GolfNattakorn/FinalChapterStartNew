@@ -147,9 +147,17 @@ public class Status : MonoBehaviour
 
     private void CheckHappy()
     {
-        if (happy <= 0)
+        if (happy < 0)
         {
             happy = 0;
+            
+        }
+    }
+
+    private void HappyEffect()
+    {
+        if (happy == 0)
+        {
             health -= 10;
         }
     }
@@ -191,9 +199,9 @@ public class Status : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
         }
-        else if (roundgame == 5)
+        else if (roundgame == 5)   /// END ROUND 5
         {
-            
+
 
             if (time == 0f || energy == 0)
             {
@@ -202,7 +210,7 @@ public class Status : MonoBehaviour
                 bank.BankInterest();
             }
         }
-        else if(roundgame >=1 && roundgame <= 4)
+        else if(roundgame >=1 && roundgame <= 4) /// END ROUND 1-4
         {
             
 
@@ -218,8 +226,8 @@ public class Status : MonoBehaviour
                 time = 60f;
                 energy = 100;
 
-                
-                CheckHappy();
+
+                HappyEffect();
                 bank.BankInterest();
                 homepro.CheckFurnitureSell();
                 hospital.RandomUnwell();
@@ -240,7 +248,7 @@ public class Status : MonoBehaviour
                 }
             }
         }
-        else
+        else                                   /// START ROUND
         {
             roundgame = roundgame + 1;
             fadePanel.SetActive(true);
@@ -255,6 +263,9 @@ public class Status : MonoBehaviour
 
 
         }
+
+        CheckHappy();
+
         TimeofGame();
         roundGameText.text = roundgame + "/5";
         
