@@ -57,6 +57,7 @@ public class Move : MonoBehaviour
             if (transform.position == waypoins[1].transform.position)
             {
                 investory.UnBlockCourse();
+                investory.UnBlockDeptDetail();
 
                 StartCoroutine(WaitInvestoryPanel());
                 moveToInvestory = false;

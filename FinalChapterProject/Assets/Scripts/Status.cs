@@ -10,6 +10,7 @@ public class Status : MonoBehaviour
     public Move move;
     public HomePro homepro;
     public Hospital hospital;
+    public Investory investory;
    
     public Text textYourname;
     public Image statusImage;
@@ -207,6 +208,8 @@ public class Status : MonoBehaviour
             {
                 ///On Result Playing Player
 
+                investory.DeptDetailEndRound();
+
                 bank.BankInterest();
             }
         }
@@ -232,6 +235,7 @@ public class Status : MonoBehaviour
                 homepro.CheckFurnitureSell();
                 hospital.RandomUnwell();
                 hospital.UnWell();
+                investory.DeptDetailResultPerRound();
 
                 player.transform.position =  move.waypoins[0].transform.position;
 

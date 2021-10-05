@@ -12,10 +12,21 @@ public class Investory : MonoBehaviour
 
     public Status status;
     public Work work;
+    public DebtDetail debtDetail;
 
-    //CheckBuy
+    //CheckBuyCouse
     public GameObject[] blockBuy;
     public GameObject[] checkBuy;
+
+    //DeptDetail
+    public bool governmentDept;
+    public bool privateDept;
+    public int governmentDeptResult;
+    public int privateDeptResult;
+
+    //CheckBuyDept
+    public GameObject[] blockBuyDept;
+    public GameObject[] checkBuyDept;
 
 
     // Start is called before the first frame update
@@ -93,6 +104,85 @@ public class Investory : MonoBehaviour
         for(int i = 0; i < blockBuy.Length; i++)
         {
             blockBuy[i].SetActive(false);
+        }
+    }
+
+    //////////////////////////////DeptDetail
+    
+    public void BuyGoVernMentDeptDetail()
+    {
+        if(governmentDept == false && status.money >= 1000 && status.energy != 0)
+        {
+            status.money -= 1000;
+            governmentDept = true;
+
+            checkBuyDept[0].SetActive(true);
+            debtDetail.messageDept[0].SetActive(true);
+            debtDetail.noneMessageDept[0].SetActive(false);
+
+
+            status.OneAction();   //Use Energy
+        }
+        else
+        {
+            blockBuyDept[0].SetActive(true);
+        }
+    }
+
+    public void BuyPrivateDeptDetail()
+    {
+        if (privateDept == false && status.money >= 1000 && status.energy != 0)
+        {
+            status.money -= 1000;
+            privateDept = true;
+
+            checkBuyDept[1].SetActive(true);
+            debtDetail.messageDept[1].SetActive(true);
+            debtDetail.noneMessageDept[1].SetActive(false);
+
+            status.OneAction();   //Use Energy
+        }
+        else
+        {
+            blockBuyDept[1].SetActive(true);
+        }
+    }
+
+    public void UnBlockDeptDetail()
+    {
+        for (int i = 0; i < blockBuyDept.Length; i++)
+        {
+            blockBuyDept[i].SetActive(false);
+        }
+    }
+
+    public void DeptDetailResultPerRound()
+    {
+        if(governmentDept == true)
+        {
+            status.money += governmentDeptResult;
+            governmentDeptResult = (1000 * 4) / 100;
+            debtDetail.governmentResultText.text = governmentDeptResult.ToString() + " B";
+        }
+        if (privateDept == true)
+        {
+            status.money += privateDeptResult;
+            privateDeptResult = (1000 * 8) / 100;
+            debtDetail.privateResultText.text = privateDeptResult.ToString() + " B";
+        }
+    }
+
+    public void DeptDetailEndRound()
+    {
+        if (governmentDept == true)
+        {
+            status.money += 1000;
+            governmentDept = false;
+        }
+        if (privateDept == true)
+        {
+            status.money += 1000;
+            privateDept = false;
         }
     }
 
