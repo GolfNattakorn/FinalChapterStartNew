@@ -11,6 +11,7 @@ public class Status : MonoBehaviour
     public HomePro homepro;
     public Hospital hospital;
     public Investory investory;
+    public EndGame endGame;
    
     public Text textYourname;
     public Image statusImage;
@@ -23,13 +24,15 @@ public class Status : MonoBehaviour
     public int knowledge;
     public int energy;
 
-    public Text moneyText;
+    
 
     //Scrollbar
+    public Scrollbar moneyScrollbar;
     public Scrollbar happyScrollbar;
     public Scrollbar healthScrollbar;
     public Scrollbar knowledgeScrollbar;
     public Scrollbar energyScrollbar;
+    public Text moneyText;
     public Text happyPointText;
     public Text healthPointText;
     public Text knowledgePointText;
@@ -54,7 +57,11 @@ public class Status : MonoBehaviour
     //GameOver
     public GameObject gameOverPanel;
 
+    //End Game
+    public GameObject endGamePanel;
 
+    //Map Panel
+    public GameObject mapPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -175,11 +182,13 @@ public class Status : MonoBehaviour
         knowledgePointText.text = knowledge + "/50";
         energyPointText.text = energy + "/100";
 
+        moneyScrollbar.size = (float)money / 1000;
         happyScrollbar.size = (float)happy / 100;
         healthScrollbar.size = (float)health / 100;
         knowledgeScrollbar.size = (float)knowledge / 50;
         energyScrollbar.size = (float)energy / 100;
 
+        moneyScrollbar.value = 0;
         happyScrollbar.value = 0;
         healthScrollbar.value = 0;
         knowledgeScrollbar.value = 0;
@@ -199,6 +208,7 @@ public class Status : MonoBehaviour
         if (health <= 0)
         {
             gameOverPanel.SetActive(true);
+            mapPanel.SetActive(false);
         }
         else if (roundgame == 5)   /// END ROUND 5
         {
@@ -207,8 +217,16 @@ public class Status : MonoBehaviour
             if (time == 0f || energy == 0)
             {
                 ///On Result Playing Player
+                endGamePanel.SetActive(true);
+                mapPanel.SetActive(false);
 
                 investory.DeptDetailEndRound();
+                bank.BankEndGame();
+                endGame.MoneySummarize();
+                endGame.HappySummarize();
+                endGame.HealthSummarize();
+                endGame.KnowledgeSummarize();
+                endGame.AllScoreSummarize();
 
                 bank.BankInterest();
             }

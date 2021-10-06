@@ -146,6 +146,12 @@ public class Bank : MonoBehaviour
         UpdateBankDepositText();
     }
 
+    public void BankEndGame()
+    {
+        status.money += bankdeposit;
+        bankdeposit = 0;
+    }
+
     private void UpdateBankDepositText()
     {
         bankDepositText.text = bankdeposit + " B ";

@@ -38,6 +38,7 @@ public class Registration : MonoBehaviour
     {
         CheckImage();
         
+        
     }
 
     public void Next()

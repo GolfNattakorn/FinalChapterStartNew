@@ -61,10 +61,11 @@
     <Compile Include="Assets\Scripts\DebtDetail.cs" />
     <Compile Include="Assets\Scripts\Restaurrant.cs" />
     <Compile Include="Assets\Scripts\Move.cs" />
+    <Compile Include="Assets\Scripts\Hospital.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
     <Compile Include="Assets\Scripts\Condo.cs" />
-    <Compile Include="Assets\Scripts\Hospital.cs" />
+    <Compile Include="Assets\Scripts\EndGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
