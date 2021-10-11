@@ -23,6 +23,7 @@ public class Status : MonoBehaviour
     public int health;
     public int knowledge;
     public int energy;
+    public Text ticketAmountText;
 
     
 
@@ -227,14 +228,13 @@ public class Status : MonoBehaviour
                 endGame.HealthSummarize();
                 endGame.KnowledgeSummarize();
                 endGame.AllScoreSummarize();
+                investory.TicketRefund();
 
                 bank.BankInterest();
             }
         }
         else if(roundgame >=1 && roundgame <= 4) /// END ROUND 1-4
         {
-            
-
             if (time == 0f || energy == 0)
             {
                 roundgame = roundgame + 1;
@@ -290,7 +290,9 @@ public class Status : MonoBehaviour
 
         TimeofGame();
         roundGameText.text = roundgame + "/5";
-        
+        CheckTimeTrade();
+
+
 
     }
 
@@ -312,6 +314,18 @@ public class Status : MonoBehaviour
             
         }
         timeText.text = timer.ToString();
+    }
+
+    private void CheckTimeTrade()
+    {
+        if(timer == 60)
+        {
+            investory.RandomTradeOne();
+        }
+        else if(timer == 30)
+        {
+            investory.RandomTradeTwo();
+        }
     }
 
     private void FadeIn()

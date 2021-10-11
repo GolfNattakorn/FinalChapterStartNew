@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Investory : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class Investory : MonoBehaviour
     public GameObject[] blockBuyDept;
     public GameObject[] checkBuyDept;
 
+    //Trade
+    public Image tradeImage;
+    public Sprite[] tradeImageSprite;
+    public int tradePrice;
+    public int ticketAmount;
+
+    //CheckTrade
+    public GameObject[] checkTrade;
 
     // Start is called before the first frame update
     void Start()
@@ -186,4 +195,114 @@ public class Investory : MonoBehaviour
         }
     }
 
+    //////////////////////////////Trade
+    public void RandomTradeOne()
+    {
+        int random = Random.Range(0, 5);
+        switch (random)
+        {
+            case 0:
+                tradeImage.sprite = tradeImageSprite[0];
+                tradePrice = 105;
+                break;
+            case 1:
+                tradeImage.sprite = tradeImageSprite[1];
+                tradePrice = 139;
+                break;
+            case 2:
+                tradeImage.sprite = tradeImageSprite[2];
+                tradePrice = 182;
+                break;
+            case 3:
+                tradeImage.sprite = tradeImageSprite[3];
+                tradePrice = 201;
+                break;
+            case 4:
+                tradeImage.sprite = tradeImageSprite[4];
+                tradePrice = 372;
+                break;
+        }
+    }
+
+    public void RandomTradeTwo()
+    {
+        int random = Random.Range(5, 10);
+        switch (random)
+        {
+            case 5:
+                tradeImage.sprite = tradeImageSprite[5];
+                tradePrice = 511;
+                break;
+            case 6:
+                tradeImage.sprite = tradeImageSprite[6];
+                tradePrice = 478;
+                break;
+            case 7:
+                tradeImage.sprite = tradeImageSprite[7];
+                tradePrice = 28;
+                break;
+            case 8:
+                tradeImage.sprite = tradeImageSprite[8];
+                tradePrice = 849;
+                break;
+            case 9:
+                tradeImage.sprite = tradeImageSprite[9];
+                tradePrice = 53;
+                break;
+        }
+    }
+
+    public void TicketRefund()
+    {
+        status.money += tradePrice * ticketAmount;
+        ticketAmount = 0;
+    }
+
+    public void BuyTicket()
+    {
+        if(status.money >= tradePrice && status.energy != 0)
+        {
+            ticketAmount += 1;
+            status.money -= tradePrice;
+            status.ticketAmountText.text = "X " + ticketAmount;
+
+            status.OneAction(); ///Use Energy
+        }
+        else
+        {
+            checkTrade[0].SetActive(true);
+            StartCoroutine(CheckBuy());
+        }
+    }
+
+    public void SellTicket()
+    {
+        if (ticketAmount > 0 && status.energy != 0)
+        {
+            ticketAmount -= 1;
+            status.money += tradePrice;
+            status.ticketAmountText.text = "X " + ticketAmount;
+
+            status.OneAction(); ///Use Energy
+        }
+        else
+        {
+            checkTrade[1].SetActive(true);
+            StartCoroutine(CheckSell());
+        }
+    }
+
+    IEnumerator CheckBuy()
+    {
+        yield return new WaitForSeconds(1.0f);
+        checkTrade[0].SetActive(false);
+        
+        
+    }
+
+    IEnumerator CheckSell()
+    {
+        yield return new WaitForSeconds(1.0f);
+        checkTrade[1].SetActive(false);
+    }
 }
