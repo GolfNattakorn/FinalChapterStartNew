@@ -23,7 +23,11 @@ public class Status : MonoBehaviour
     public int health;
     public int knowledge;
     public int energy;
+
+    public GameObject ticketImage;
     public Text ticketAmountText;
+
+    public GameObject DebtImage;
 
     
 

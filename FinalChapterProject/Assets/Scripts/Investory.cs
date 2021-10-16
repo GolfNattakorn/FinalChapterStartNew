@@ -38,6 +38,8 @@ public class Investory : MonoBehaviour
     //CheckTrade
     public GameObject[] checkTrade;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,7 @@ public class Investory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckShowTicket();
     }
 
     //In the Investory Panel
@@ -128,6 +130,7 @@ public class Investory : MonoBehaviour
             checkBuyDept[0].SetActive(true);
             debtDetail.messageDept[0].SetActive(true);
             debtDetail.noneMessageDept[0].SetActive(false);
+            status.DebtImage.SetActive(true);
 
 
             status.OneAction();   //Use Energy
@@ -148,6 +151,7 @@ public class Investory : MonoBehaviour
             checkBuyDept[1].SetActive(true);
             debtDetail.messageDept[1].SetActive(true);
             debtDetail.noneMessageDept[1].SetActive(false);
+            status.DebtImage.SetActive(true);
 
             status.OneAction();   //Use Energy
         }
@@ -190,8 +194,12 @@ public class Investory : MonoBehaviour
         }
         if (privateDept == true)
         {
-            status.money += 1000;
-            privateDept = false;
+            int random = Random.Range(1, 3);
+            if(random == 1)
+            {
+                status.money += 1000;
+                privateDept = false;
+            }
         }
     }
 
@@ -258,6 +266,36 @@ public class Investory : MonoBehaviour
         ticketAmount = 0;
     }
 
+    public void CheckShowTicket()
+    {
+        if(ticketAmount >= 1)
+        {
+            status.ticketImage.SetActive(true);
+        }
+        else
+        {
+            status.ticketImage.SetActive(false);
+        }
+    }
+
+    public void BuyTicketAllMoney()
+    {
+        if (status.money >= tradePrice && status.energy != 0)
+        {
+            ticketAmount += status.money/tradePrice; // found Amount ticket
+            status.money = status.money%tradePrice; // Amount Money left
+            status.ticketAmountText.text = "X " + ticketAmount;
+            
+
+            status.OneAction(); ///Use Energy
+        }
+        else
+        {
+            checkTrade[0].SetActive(true);
+            StartCoroutine(CheckBuy());
+        }
+    }
+
     public void BuyTicket()
     {
         if(status.money >= tradePrice && status.energy != 0)
@@ -265,6 +303,7 @@ public class Investory : MonoBehaviour
             ticketAmount += 1;
             status.money -= tradePrice;
             status.ticketAmountText.text = "X " + ticketAmount;
+            
 
             status.OneAction(); ///Use Energy
         }
@@ -281,6 +320,23 @@ public class Investory : MonoBehaviour
         {
             ticketAmount -= 1;
             status.money += tradePrice;
+            status.ticketAmountText.text = "X " + ticketAmount;
+
+            status.OneAction(); ///Use Energy
+        }
+        else
+        {
+            checkTrade[1].SetActive(true);
+            StartCoroutine(CheckSell());
+        }
+    }
+
+    public void SellAllTicket()
+    {
+        if (ticketAmount > 0 && status.energy != 0)
+        {
+            status.money += tradePrice*ticketAmount; // money received
+            ticketAmount = 0;
             status.ticketAmountText.text = "X " + ticketAmount;
 
             status.OneAction(); ///Use Energy
