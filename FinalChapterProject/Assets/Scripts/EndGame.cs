@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,17 +73,17 @@ public class EndGame : MonoBehaviour
         if(status.money >= maxScrollMoney * 71 / 100)
         {
             allScore += 2;
-            moneySummarText.text = "¥’¡“°";
+            moneySummarText.text = "‡∏î‡∏µ‡∏°‡∏≤‡∏Å";
         }
-        else if(status.money >= maxScrollMoney * 41 / 100)
+        else if(status.money >= maxScrollMoney * 51 / 100)
         {
             allScore += 1;
-            moneySummarText.text = "¥’";
+            moneySummarText.text = "‡∏î‡∏µ";
         }
         else
         {
             allScore += 0;
-            moneySummarText.text = "·¬Ë";
+            moneySummarText.text = "‡πÅ‡∏¢‡πà";
         }
     }
 
@@ -92,17 +92,17 @@ public class EndGame : MonoBehaviour
         if (status.happy >= maxScrollHappy * 71 / 100)
         {
             allScore += 2;
-            happySummarText.text = "¥’¡“°";
+            happySummarText.text = "‡∏î‡∏µ‡∏°‡∏≤‡∏Å";
         }
-        else if (status.money >= maxScrollHappy * 41 / 100)
+        else if (status.happy >= maxScrollHappy * 51 / 100)
         {
             allScore += 1;
-            happySummarText.text = "¥’";
+            happySummarText.text = "‡∏î‡∏µ";
         }
         else
         {
             allScore += 0;
-            happySummarText.text = "·¬Ë";
+            happySummarText.text = "‡πÅ‡∏¢‡πà";
         }
     }
 
@@ -111,17 +111,17 @@ public class EndGame : MonoBehaviour
         if (status.health >= maxScrollHealth * 71 / 100)
         {
             allScore += 2;
-            healthSummarText.text = "¥’¡“°";
+            healthSummarText.text = "‡∏î‡∏µ‡∏°‡∏≤‡∏Å";
         }
-        else if (status.money >= maxScrollHealth * 41 / 100)
+        else if (status.health >= maxScrollHealth * 51 / 100)
         {
             allScore += 1;
-            healthSummarText.text = "¥’";
+            healthSummarText.text = "‡∏î‡∏µ";
         }
         else
         {
             allScore += 0;
-            healthSummarText.text = "·¬Ë";
+            healthSummarText.text = "‡πÅ‡∏¢‡πà";
         }
     }
 
@@ -130,17 +130,17 @@ public class EndGame : MonoBehaviour
         if (status.knowledge == 50)
         {
             allScore += 2;
-            knowledgeSummarText.text = "¥’¡“°";
+            knowledgeSummarText.text = "‡∏î‡∏µ‡∏°‡∏≤‡∏Å";
         }
         else if (status.knowledge >= 30)
         {
             allScore += 1;
-            knowledgeSummarText.text = "¥’";
+            knowledgeSummarText.text = "‡∏î‡∏µ";
         }
         else
         {
             allScore += 0;
-            knowledgeSummarText.text = "·¬Ë";
+            knowledgeSummarText.text = "‡πÅ‡∏¢‡πà";
         }
     }
 
@@ -148,22 +148,22 @@ public class EndGame : MonoBehaviour
     {
         if(allScore >= 6)
         {
-            summarizeText.text = "¥’¡“°";
+            summarizeText.text = "‡∏î‡∏µ‡∏°‡∏≤‡∏Å";
             summarizeImage.sprite = summarizeSprite[0];
-            summarizeExplain.text = "§ÿ≥ " + registration.yourName.text + " §ÿ≥„™È™’«‘µ‰¥È¥’¡“°"; /// you live very well
+            summarizeExplain.text = "‡∏Ñ‡∏∏‡∏ì " + registration.yourName.text + " ‡∏Ñ‡∏π‡∏ì‡πÉ‡∏ä‡πâ‡∏ä‡∏µ‡∏ß‡∏¥‡∏ï‡πÑ‡∏î‡πâ‡∏î‡∏µ‡∏°‡∏≤‡∏Å"; /// you live very well
 
         }
         else if (allScore >= 3)
         {
-            summarizeText.text = "¥’";
+            summarizeText.text = "‡∏î‡∏µ";
             summarizeImage.sprite = summarizeSprite[1];
-            summarizeExplain.text = "§ÿ≥ " + registration.yourName.text + " ∂◊Õ«Ë“§ÿ≥„™È™’«‘µ‰¥È¥’"; /// You're living a very good life.
+            summarizeExplain.text = "‡∏Ñ‡∏∏‡∏ì " + registration.yourName.text + " ‡∏ñ‡∏∑‡∏≠‡∏ß‡πà‡∏≤‡∏Ñ‡∏π‡∏ì‡πÉ‡∏ä‡πâ‡∏ä‡∏µ‡∏ß‡∏¥‡∏ï‡πÑ‡∏î‡πâ‡∏î‡∏µ"; /// You're living a very good life.
         }
         else
         {
-            summarizeText.text = "·¬Ë";
+            summarizeText.text = "‡πÅ‡∏¢‡πà";
             summarizeImage.sprite = summarizeSprite[2];
-            summarizeExplain.text = "§ÿ≥ " + registration.yourName.text + " §ÿ≥„™È™’«‘µ‰¥È‰¡Ë¥’‡≈¬π–"; /// You're not living well.
+            summarizeExplain.text = "‡∏Ñ‡∏∏‡∏ì " + registration.yourName.text + " ‡∏Ñ‡∏π‡∏ì‡πÉ‡∏ä‡πâ‡∏ä‡∏µ‡∏ß‡∏¥‡∏ï‡πÑ‡∏î‡πâ‡πÑ‡∏°‡πà‡∏î‡∏µ‡πÄ‡∏•‡∏¢‡∏ô‡∏∞"; /// You're not living well.
         }
     }
 

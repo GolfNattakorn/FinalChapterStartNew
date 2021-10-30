@@ -19,7 +19,7 @@ public class Bank : MonoBehaviour
     void Start()
     {
         bankdeposit = 0;
-        bankDepositText.text = bankdeposit + " B ";
+        bankDepositText.text = bankdeposit + "";
     }
 
     // Update is called once per frame
@@ -154,6 +154,6 @@ public class Bank : MonoBehaviour
 
     private void UpdateBankDepositText()
     {
-        bankDepositText.text = bankdeposit + " B ";
+        bankDepositText.text = bankdeposit + "";
     }
 }

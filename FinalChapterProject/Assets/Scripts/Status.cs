@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +29,7 @@ public class Status : MonoBehaviour
 
     public GameObject DebtImage;
 
-    
+    public Transform allStatus;
 
     //Scrollbar
     public Scrollbar moneyScrollbar;
@@ -67,6 +67,9 @@ public class Status : MonoBehaviour
 
     //Map Panel
     public GameObject mapPanel;
+
+    //Event
+    public int eventCount;
 
     // Start is called before the first frame update
     void Start()
@@ -239,46 +242,51 @@ public class Status : MonoBehaviour
         }
         else if(roundgame >=1 && roundgame <= 4) /// END ROUND 1-4
         {
+            
             if (time == 0f || energy == 0)
             {
                 roundgame = roundgame + 1;
                 fadePanel.SetActive(true);
-                fadeRoundText.text = "ÃÍº·Õè " + roundgame;
+                fadeRoundText.text = "à¸£à¸­à¸šà¸—à¸µà¹ˆ " + roundgame;
                 FadeIn();
 
                 Debug.Log("Round " + roundgame);
 
                 time = 60f;
                 energy = 100;
+                
 
 
                 HappyEffect();
                 bank.BankInterest();
                 homepro.CheckFurnitureSell();
-                hospital.RandomUnwell();
                 hospital.UnWell();
+                hospital.RandomUnwell();
                 investory.DeptDetailResultPerRound();
 
                 player.transform.position =  move.waypoins[0].transform.position;
+                move.ResetRound();
 
                 for (int i = 0; i < allMapPanel.Length; i++) //Open StartPointPanel When Start Next Round 
                 {
-                    if(i == 0)
+                    if (i == 0)
                     {
                         allMapPanel[0].SetActive(true);
+                        allMapPanel[0].transform.localScale = Vector2.one;
                     }
                     else
                     {
                         allMapPanel[i].SetActive(false);
+                        allMapPanel[i].transform.localScale = Vector2.zero;
                     }
                 }
             }
         }
         else                                   /// START ROUND
-        {
+        { 
             roundgame = roundgame + 1;
             fadePanel.SetActive(true);
-            fadeRoundText.text = "ÃÍº·Õè " + roundgame;
+            fadeRoundText.text = "à¸£à¸­à¸šà¸—à¸µà¹ˆ " + roundgame;
             FadeIn();
 
             Debug.Log("Round " + roundgame);
@@ -302,21 +310,25 @@ public class Status : MonoBehaviour
 
     private void TimeofGame()
     {
-        if(time >= 1)
+        if(eventCount == 0)
         {
-            time = time - 1*Time.deltaTime;
-            timer = System.Convert.ToInt32(time);
-            
-            
-            
+            if (time >= 1)
+            {
+                time = time - 1 * Time.deltaTime;
+                
+
+
+
+            }
+            else
+            {
+                time = 0f;
+                
+
+
+            }
         }
-        else
-        {
-            time = 0f;
-            timer = System.Convert.ToInt32(time);
-            
-            
-        }
+        timer = System.Convert.ToInt32(time);
         timeText.text = timer.ToString();
     }
 
@@ -347,5 +359,21 @@ public class Status : MonoBehaviour
         fadeImage.CrossFadeAlpha(0, 1.0f, false);
         yield return new WaitForSeconds(1.0f);
         fadePanel.SetActive(false);
+    }
+
+    public void OpenStatus()
+    {
+        //allStatus.localPosition = new Vector2(0, -Screen.height);
+        //allStatus.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().delay = 0.1f;
+
+        //allStatus.localPosition = new Vector2(0, -Screen.height);
+        allStatus.LeanMoveLocalX(-300, 0.5f).setEaseOutExpo().delay = 0.1f;
+    }
+
+    public void CloseStatus()
+    {
+        //allStatus.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo();
+        
+        allStatus.LeanMoveLocalX(-800, 0.3f).setEaseInExpo();
     }
 }

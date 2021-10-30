@@ -22,12 +22,14 @@ public class Hospital : MonoBehaviour
     public Sprite[] unwellPlayer;
 
     //Unwell Event
-    public GameObject unwellPanel;
+    public Transform unwellPanel;
+    public CanvasGroup background;
+    public GameObject bg;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+  
     }
 
     // Update is called once per frame
@@ -85,10 +87,19 @@ public class Hospital : MonoBehaviour
             int random = Random.Range(1, randomMax);
             if(random == 1)
             {
+                status.statusImage.sprite = unwellPlayer[registration.yourimage];
+                status.playerImage.sprite = unwellPlayer[registration.yourimage];
 
                 unwell = true;
                 unWellTime = 1;
-                unwellPanel.SetActive(true);
+
+                status.eventCount += 1;
+
+                background.alpha = 0;
+                background.LeanAlpha(1, 0.5f);
+                bg.SetActive(true);
+                unwellPanel.localPosition = new Vector2(0, -Screen.height);
+                unwellPanel.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().delay = 0.1f;
             }
             else
             {
@@ -99,15 +110,24 @@ public class Hospital : MonoBehaviour
 
     public void CloseUnwellPanel()
     {
-        unwellPanel.SetActive(false);
+        //unwellPanel.SetActive(false);
+        status.eventCount -= 1;
+
+        background.LeanAlpha(0, 0.5f);
+        StartCoroutine(WaitCloseBG());
+        unwellPanel.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo();
+    }
+
+    IEnumerator WaitCloseBG()
+    {
+        yield return new WaitForSeconds(0.5f);
+        bg.SetActive(false);
     }
 
     public void UnWell()
     {
         if(unwell == true)
         {
-            status.statusImage.sprite = unwellPlayer[registration.yourimage];
-            status.playerImage.sprite = unwellPlayer[registration.yourimage];
 
             status.health -= 20;
             status.happy -= 40;
